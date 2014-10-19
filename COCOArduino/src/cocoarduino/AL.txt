@@ -1,0 +1,21 @@
+<RESERVADA,clase>
+<UNESPACIO, >
+<ID,Impar>
+<DOSESPACIOS,  >
+<RESERVADA,propiedades>
+<DOSESPACIOS,  >
+<DOSESPACIOS,  >
+<RESERVADA,cadena>
+<UNESPACIO, >
+<ID,hola>
+<UNESPACIO, >
+<FNLINEA,;>
+<DOSESPACIOS,  >
+<RESERVADA,metodos>
+<DOSESPACIOS,  >
+<DOSESPACIOS,  >
+<RESERVADA,entero>
+<UNESPACIO, >
+<ID,esImpar>
+<UNESPACIO, >
+<UNESPACIO, >
