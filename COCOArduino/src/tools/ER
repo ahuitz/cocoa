@@ -29,6 +29,7 @@ nomClase = [A-Z]+{variables}
 
 
 %state PROPIEDADES, VARCLASE, TODO, ERESERV, ESIGNOS, EVARIABLES
+%state NOMETODOS,EPARENTESIS, EMETODOS
 
 %%
 <YYINITIAL>{
@@ -67,7 +68,7 @@ nomClase = [A-Z]+{variables}
     "cadena" {yybegin(EVARIABLES); clasif=yytext(); return RESERVADA;}
     "entero" {yybegin(EVARIABLES); clasif=yytext(); return RESERVADA;}
     "decimal" {yybegin(EVARIABLES); clasif=yytext(); return RESERVADA;}
-    "metodos" {clasif=yytext(); return RESERVADA;}
+    "metodos" {yybegin(EMETODOS); clasif=yytext(); return RESERVADA;}
     ("  ") {clasif=yytext(); return DOSESPACIOS;}
     (" ") {clasif=yytext(); return UNESPACIO;}    
     [\r\f] {}
@@ -85,6 +86,21 @@ nomClase = [A-Z]+{variables}
     ("  ") {clasif=yytext(); return DOSESPACIOS;}
     (" ") {clasif=yytext(); return UNESPACIO;}        
     . {yyclose();}
+}
+<EMETODOS>{
+    "boleano" {yybegin(NOMETODOS);clasif=yytext(); return RESERVADA;}
+    "cadena" {yybegin(NOMETODOS); clasif=yytext(); return RESERVADA;}
+    "entero" {yybegin(NOMETODOS); clasif=yytext(); return RESERVADA;}
+    "decimal" {yybegin(NOMETODOS); clasif=yytext(); return RESERVADA;}
+}
+<NOMETODOS>{
+    {variables} {yybegin(EPARENTESIS); clasif=yytext(); return ID;}
+    ("  ") {clasif=yytext(); return DOSESPACIOS;}
+    (" ") {clasif=yytext(); return UNESPACIO;}        
+    . {yyclose();}
+}
+<EPARENTESIS>{
+    
 }
 <TODO>{
 "\""       {clasif=yytext(); return ESPECIALES;}
