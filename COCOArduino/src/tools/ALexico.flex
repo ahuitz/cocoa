@@ -26,83 +26,18 @@ nomClase = [A-Z]+{variables}
     public int errorLinea;
 %}
 
-
-
-%state PROPIEDADES, VARCLASE, TODO, ERESERV, ESIGNOS, EVARIABLES
-%state NOMETODOS,EPARENTESIS, EMETODOS
-
 %%
-<YYINITIAL>{
-    "clase" {
-                yybegin(VARCLASE);
-                clasif=yytext();
-                return RESERVADA; 
-            }
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}
-    [\r\f] {}
-    [^"clase"] {
-                System.out.println(yyline);
-                yyclose();
-            }
-}
-<PROPIEDADES>{
-    "propiedades" {yybegin(ERESERV);clasif=yytext(); return RESERVADA;}
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}
-    [\r\f] {}
-    . {System.out.println("Error en la linea--> " yyline);yyclose();}
-}
+"clase" {clasif=yytext(); return RESERVADA;}
+"propiedades" {clasif=yytext(); return RESERVADA;} 
+{nomClase} {clasif=yytext(); return ID;}
 
-<VARCLASE>{    
-    {nomClase} {yybegin(PROPIEDADES); clasif=yytext(); return ID;}
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}    
-    [0-9]*{nomClase} {yyclose();}
-    [\r\f] {}    
-    . {yyclose();}
-}
-<ERESERV>{
     /*RESERVADAS*/
-    "boleano" {yybegin(EVARIABLES);clasif=yytext(); return RESERVADA;}
-    "cadena" {yybegin(EVARIABLES); clasif=yytext(); return RESERVADA;}
-    "entero" {yybegin(EVARIABLES); clasif=yytext(); return RESERVADA;}
-    "decimal" {yybegin(EVARIABLES); clasif=yytext(); return RESERVADA;}
-    "metodos" {yybegin(EMETODOS); clasif=yytext(); return RESERVADA;}
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}    
-    [\r\f] {}
-    . {yyclose();}
-}
-<EVARIABLES>{
-    {variables}+ {yybegin(ESIGNOS); clasif=yytext(); return ID;}
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}        
-    
-}
-<ESIGNOS>{
-    ";" {yybegin(ERESERV); clasif=yytext(); return FNLINEA;}
-    "," {yybegin(EVARIABLES); clasif=yytext(); return ESPECIALES;}
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}        
-    . {yyclose();}
-}
-<EMETODOS>{
-    "boleano" {yybegin(NOMETODOS);clasif=yytext(); return RESERVADA;}
-    "cadena" {yybegin(NOMETODOS); clasif=yytext(); return RESERVADA;}
-    "entero" {yybegin(NOMETODOS); clasif=yytext(); return RESERVADA;}
-    "decimal" {yybegin(NOMETODOS); clasif=yytext(); return RESERVADA;}
-}
-<NOMETODOS>{
-    {variables} {yybegin(EPARENTESIS); clasif=yytext(); return ID;}
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}        
-    . {yyclose();}
-}
-<EPARENTESIS>{
-    
-}
-<TODO>{
+    "boleano" {clasif=yytext(); return RESERVADA;}
+    "cadena" {clasif=yytext(); return RESERVADA;}
+    "entero" {clasif=yytext(); return RESERVADA;}
+    "decimal" {clasif=yytext(); return RESERVADA;}
+    "metodos" {clasif=yytext(); return RESERVADA;}   
+
 "\""       {clasif=yytext(); return ESPECIALES;}
 
 {flotante}      {clasif=yytext(); return NUMERO;}
@@ -167,6 +102,6 @@ nomClase = [A-Z]+{variables}
 
 
 /*FIN DE LINEA*/
-}
+
 [\r\n\f] {}
 . {yyclose(); return ERROR;}

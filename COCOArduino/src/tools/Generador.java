@@ -19,7 +19,7 @@ public class Generador {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JFlex.Main.generate(new File("src\\tools\\ER"));
+        JFlex.Main.generate(new File("src\\tools\\ALexico.flex"));
     }
     
 }
