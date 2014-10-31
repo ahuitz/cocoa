@@ -78,6 +78,18 @@ public class token {
     public void setDecimal(float decimal) {
         this.decimal = decimal;
     }
+
+    public token(String cadenas) {
+        this.cadenas = cadenas;
+    }
+
+    public String getCadenas() {
+        return cadenas;
+    }
+
+    public void setCadenas(String cadenas) {
+        this.cadenas = cadenas;
+    }
     
     
  
