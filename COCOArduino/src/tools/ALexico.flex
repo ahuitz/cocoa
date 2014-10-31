@@ -18,6 +18,7 @@ finL = [\r|\n|\r\n]
 comentarioA = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 comentarioB = "//" {entradaC}*{finL}?
 nomClase = [A-Z]+{variables}
+comillas="\"" {entradaC}*{finL}? "\""
 
 %eofval{
   System.out.println("Fin de archivo encontrado");
@@ -97,6 +98,9 @@ nomClase = [A-Z]+{variables}
 /*ESPACIOS*/
     ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline, yytext()));}
     (" ") {return new Symbol(sym.UNESPACIO, new token(yyline, yytext()));}
+
+/*COMILLAS*/
+({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline, yytext()));}
     
 
 

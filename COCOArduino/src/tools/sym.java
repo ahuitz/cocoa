@@ -26,4 +26,5 @@ public class sym {
     public static final int UNESPACIO=12;//
     public static final int DOSESPACIOS=13;//indentacion
     public static final int TABULADOR=14;
+    public static final int CADENAS=15;
 }

@@ -16,6 +16,7 @@ public class token {
     private String cadena;
     private int entero;
     private float decimal;
+    private String cadenas;
 
     /**
      * constructor que convierte los numeros a enteros o flotantes
@@ -25,15 +26,17 @@ public class token {
      * @param esEntero variable que recibe verdadero si es un numero entero, de lo contario se
      *                   asume que es un flotante/decimal
      */
-    public token(int fila, String identificador, String cadena, boolean esEntero) {
+    public token(int fila, String identificador, String cadena, boolean esEntero, String cadenas) {
         this.fila = fila;        
         this.cadena = cadena;
+        this.cadenas=cadenas;
         if(esEntero){
             this.entero = Integer.parseInt(cadena);
         }else{
             this.decimal = Float.parseFloat(cadena);
         }
     }   
+
     /**
      * 
      * @param fila numero de fila en la que se encuentra el caracter almacenado
