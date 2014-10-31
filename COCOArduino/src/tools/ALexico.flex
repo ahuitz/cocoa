@@ -1,10 +1,9 @@
 package tools;
-import tools.Identificador;
-import static tools.Identificador.*;
+import java_cup.runtime.Symbol;
 %%
 %class Lexico
-%type Identificador
 %line
+%cup
 
 comilla= ["a-zA-Z"]
 entero= [0-9]
@@ -20,88 +19,90 @@ comentarioA = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 comentarioB = "//" {entradaC}*{finL}?
 nomClase = [A-Z]+{variables}
 
-%{
-    public String clasif;
-    public boolean estado=true;
-    public int errorLinea;
-%}
+%eofval{
+  System.out.println("Fin de archivo encontrado");
+  return new Symbol(sym.EOF);
+%eofval}
+%eofclose
 
 %%
-"clase" {clasif=yytext(); return RESERVADA;}
-"propiedades" {clasif=yytext(); return RESERVADA;} 
-{nomClase} {clasif=yytext(); return ID;}
+"clase" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"propiedades" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));} 
+{nomClase} {return new Symbol(sym.ID, new token(yyline, yytext()));}
 
     /*RESERVADAS*/
-    "boleano" {clasif=yytext(); return RESERVADA;}
-    "cadena" {clasif=yytext(); return RESERVADA;}
-    "entero" {clasif=yytext(); return RESERVADA;}
-    "decimal" {clasif=yytext(); return RESERVADA;}
-    "metodos" {clasif=yytext(); return RESERVADA;}   
+    "boleano" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+    "cadena" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+    "entero" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+    "decimal" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+    "metodos" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}   
 
-"\""       {clasif=yytext(); return ESPECIALES;}
 
-{flotante}      {clasif=yytext(); return NUMERO;}
-{entero}+       {clasif=yytext(); return NUMERO;}
+
+{flotante}      {return new Symbol(sym.NUMERO, new token(yyline, yytext()));}
+{entero}+       {return new Symbol(sym.NUMERO, new token(yyline, yytext()));}
 
 /*Palabras Reservadas*/
-{and}           {clasif=yytext(); return RESERVADA;}
-"clase"         {clasif=yytext(); return RESERVADA;}
-"desde"         {clasif=yytext(); return RESERVADA;}
-"devolver"      {clasif=yytext(); return RESERVADA;}
-"entonces"      {clasif=yytext(); return RESERVADA;}
-"escribir"      {clasif=yytext(); return RESERVADA;}
-"extiende"      {clasif=yytext(); return RESERVADA;}
-"falso"         {clasif=yytext(); return RESERVADA;}
-"hacer"         {clasif=yytext(); return RESERVADA;}
-"incrementar"   {clasif=yytext(); return RESERVADA;}
-"leer"          {clasif=yytext(); return RESERVADA;}
-"mientras"      {clasif=yytext(); return RESERVADA;}
-"NULO"|"nulo"   {clasif=yytext(); return RESERVADA;}
-"sino"          {clasif=yytext(); return RESERVADA;}
-"si"            {clasif=yytext(); return RESERVADA;}
-"retornar"      {clasif=yytext(); return RESERVADA;}
-{or}            {clasif=yytext(); return RESERVADA;}
-"verdadero"     {clasif=yytext(); return RESERVADA;}
+{and}           {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"clase"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"desde"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"devolver"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"entonces"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"escribir"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"extiende"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"falso"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"hacer"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"incrementar"   {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"leer"          {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"mientras"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"NULO"|"nulo"   {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"sino"          {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"si"            {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"retornar"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+{or}            {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+"verdadero"     {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
 
 
 /*IDENTIFICADORES*/
-{variables}+       {clasif=yytext(); return ID;}
+{variables}+       {return new Symbol(sym.ID, new token(yyline, yytext()));}
 
 /*OPERADORES*/
-"++"            {clasif=yytext(); return OPERADOR;}
-"+"             {clasif=yytext(); return OPERADOR;}
-"--"            {clasif=yytext(); return OPERADOR;}
-"-"             {clasif=yytext(); return OPERADOR;} 
-"*"             {clasif=yytext(); return OPERADOR;}
-"%"             {clasif=yytext(); return OPERADOR;}
-"=="            {clasif=yytext(); return OPERADOR;}
-"="             {clasif=yytext(); return OPERADOR;}
-"/"             {clasif=yytext(); return OPERADOR;}
-">"             {clasif=yytext(); return OPERADOR;}
-"<"             {clasif=yytext(); return OPERADOR;}
-"!="            {clasif=yytext(); return OPERADOR;}
-"|"             {clasif=yytext(); return OPERADOR;}
+"++"            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"+"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"--"            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"-"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"*"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"%"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"=="            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"="             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"/"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+">"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"<"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"!="            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"|"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
 
 /*ESPECIALES*/
-";"             {clasif=yytext(); return FNLINEA;}
-"."             {clasif=yytext(); return ESPECIALES;}
-"("             {clasif=yytext(); return ESPECIALES;}
-")"             {clasif=yytext(); return ESPECIALES;}
-","             {clasif=yytext(); return ESPECIALES;}
-"["             {clasif=yytext(); return ESPECIALES;}
-"]"             {clasif=yytext(); return ESPECIALES;}
+";"             {return new Symbol(sym.FNLINEA, new token(yyline, yytext()));}
+"."             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
+"("             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
+")"             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
+","             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
+"["             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
+"]"             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
 
 /*COMENTARIOS*/
-({comentarioB})+ {clasif=yytext(); return COMENTARIOS;}
-({comentarioA})+ {clasif=yytext(); return COMENTARIOS;}
+({comentarioB})+ {return new Symbol(sym.COMENTARIOS, new token(yyline, yytext()));}
+({comentarioA})+ {return new Symbol(sym.COMENTARIOS, new token(yyline, yytext()));}
 
 /*ESPACIOS*/
-    ("  ") {clasif=yytext(); return DOSESPACIOS;}
-    (" ") {clasif=yytext(); return UNESPACIO;}
+    ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline, yytext()));}
+    (" ") {return new Symbol(sym.UNESPACIO, new token(yyline, yytext()));}
     
 
 
 /*FIN DE LINEA*/
 
 [\r\n\f] {}
-. {yyclose(); return ERROR;}
+. {yyclose(); 
+    System.err.println("Caracter Invalido" + yytext() + "["+ yyline + "]");
+    return new Symbol(sym.ERROR);}
