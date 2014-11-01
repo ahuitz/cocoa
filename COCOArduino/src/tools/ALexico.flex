@@ -27,80 +27,77 @@ comillas="\"" {entradaC}*{finL}? "\""
 %eofclose
 
 %%
-"clase" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"propiedades" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));} 
-{nomClase} {return new Symbol(sym.ID, new token(yyline, yytext()));}
+"clase" {return new Symbol(sym.CLASE, new token(yyline,"RESERVADA", yytext()));}
+"propiedades" {return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
+{nomClase} {return new Symbol(sym.NOMCLASE, new token(yyline,"ID", yytext()));}
 
-    /*RESERVADAS*/
-    "boleano" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-    "cadena" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-    "entero" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-    "decimal" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-    "metodos" {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}   
+    /*RESERVADAS PARA METODOS*/
+        "boleano" {return new Symbol(sym.BOLEANO, new token(yyline,"RESERVADA", yytext()));}
+        "cadena" {return new Symbol(sym.CADENA, new token(yyline,"RESERVADA", yytext()));}
+        "entero" {return new Symbol(sym.ENTERO, new token(yyline,"RESERVADA", yytext()));}
+        "decimal" {return new Symbol(sym.DECIMAL, new token(yyline,"RESERVADA", yytext()));}
+        "metodos" {return new Symbol(sym.METODOS, new token(yyline,"RESERVADA", yytext()));}   
 
-
-
-{flotante}      {return new Symbol(sym.NUMERO, new token(yyline, yytext()));}
-{entero}+       {return new Symbol(sym.NUMERO, new token(yyline, yytext()));}
+{flotante}      {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext()));}
+{entero}+       {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext()));}
 
 /*Palabras Reservadas*/
-{and}           {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"clase"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"desde"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"devolver"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"entonces"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"escribir"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"extiende"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"falso"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"hacer"         {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"incrementar"   {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"leer"          {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"mientras"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"NULO"|"nulo"   {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"sino"          {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"si"            {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"retornar"      {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-{or}            {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
-"verdadero"     {return new Symbol(sym.RESERVADA, new token(yyline, yytext()));}
+{and}           {return new Symbol(sym.AND, new token(yyline,"RESERVADA", yytext()));}
+"desde"         {return new Symbol(sym.DESDE, new token(yyline,"RESERVADA", yytext()));}
+"devolver"      {return new Symbol(sym.DEVOLVER, new token(yyline,"RESERVADA", yytext()));}
+"entonces"      {return new Symbol(sym.ENTONCES, new token(yyline,"RESERVADA", yytext()));}
+"escribir"      {return new Symbol(sym.ESCRIBIR, new token(yyline,"RESERVADA", yytext()));}
+"extiende"      {return new Symbol(sym.EXTIENDE, new token(yyline,"RESERVADA", yytext()));}
+"falso"         {return new Symbol(sym.FALSO, new token(yyline,"RESERVADA", yytext()));}
+"hacer"         {return new Symbol(sym.HACER, new token(yyline,"RESERVADA", yytext()));}
+"incrementar"   {return new Symbol(sym.INCREMENTAR, new token(yyline,"RESERVADA", yytext()));}
+"leer"          {return new Symbol(sym.LEER, new token(yyline,"RESERVADA", yytext()));}
+"mientras"      {return new Symbol(sym.MIENTRAS, new token(yyline,"RESERVADA", yytext()));}
+"NULO"|"nulo"   {return new Symbol(sym.NULO, new token(yyline,"RESERVADA", yytext()));}
+"sino"          {return new Symbol(sym.SINO, new token(yyline,"RESERVADA", yytext()));}
+"si"            {return new Symbol(sym.SI, new token(yyline,"RESERVADA", yytext()));}
+"retornar"      {return new Symbol(sym.RETORNAR, new token(yyline,"RESERVADA", yytext()));}
+{or}            {return new Symbol(sym.OR, new token(yyline,"RESERVADA", yytext()));}
+"verdadero"     {return new Symbol(sym.VERDADERO, new token(yyline,"RESERVADA", yytext()));}
 
 
 /*IDENTIFICADORES*/
-{variables}+       {return new Symbol(sym.ID, new token(yyline, yytext()));}
+{variables}+       {return new Symbol(sym.VARIABLE, new token(yyline,"ID",yytext()));}
 
 /*OPERADORES*/
-"++"            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"+"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"--"            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"-"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"*"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"%"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"=="            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"="             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"/"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-">"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"<"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"!="            {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
-"|"             {return new Symbol(sym.OPERADOR, new token(yyline, yytext()));}
+"++"            {return new Symbol(sym.MMAS, new token(yyline,"OPERADOR", yytext()));}
+"+"             {return new Symbol(sym.SUMA, new token(yyline,"OPERADOR", yytext()));}
+"--"            {return new Symbol(sym.MMENOS, new token(yyline,"OPERADOR", yytext()));}
+"-"             {return new Symbol(sym.RESTA, new token(yyline,"OPERADOR", yytext()));}
+"*"             {return new Symbol(sym.MULTIPLICACION, new token(yyline,"OPERADOR", yytext()));}
+"%"             {return new Symbol(sym.MODULO, new token(yyline,"OPERADOR", yytext()));}
+"=="            {return new Symbol(sym.IIGUAL, new token(yyline,"OPERADOR", yytext()));}
+"="             {return new Symbol(sym.IGUAL, new token(yyline,"OPERADOR", yytext()));}
+"/"             {return new Symbol(sym.DIAGONAL, new token(yyline,"OPERADOR", yytext()));}
+">"             {return new Symbol(sym.MAYORQUE, new token(yyline,"OPERADOR", yytext()));}
+"<"             {return new Symbol(sym.MENORQUE, new token(yyline,"OPERADOR", yytext()));}
+"!="            {return new Symbol(sym.DIFERENCIA, new token(yyline,"OPERADOR", yytext()));}
+"|"             {return new Symbol(sym.OPCION, new token(yyline,"OPERADOR", yytext()));}
 
 /*ESPECIALES*/
-";"             {return new Symbol(sym.FNLINEA, new token(yyline, yytext()));}
-"."             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
-"("             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
-")"             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
-","             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
-"["             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
-"]"             {return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));}
+";"             {return new Symbol(sym.PCOMA, new token(yyline,"ESPECIALES", yytext()));}
+"."             {return new Symbol(sym.PUNTO, new token(yyline,"ESPECIALES", yytext()));}
+"("             {return new Symbol(sym.PA, new token(yyline,"ESPECIALES", yytext()));}
+")"             {return new Symbol(sym.PC, new token(yyline,"ESPECIALES", yytext()));}
+","             {return new Symbol(sym.COMA, new token(yyline,"ESPECIALES", yytext()));}
+"["             {return new Symbol(sym.CA, new token(yyline,"ESPECIALES", yytext()));}
+"]"             {return new Symbol(sym.CC, new token(yyline,"ESPECIALES", yytext()));}
 
 /*COMENTARIOS*/
-({comentarioB})+ {return new Symbol(sym.COMENTARIOS, new token(yyline, yytext()));}
-({comentarioA})+ {return new Symbol(sym.COMENTARIOS, new token(yyline, yytext()));}
+({comentarioB})+ {return new Symbol(sym.COMENTARIOB, new token(yyline,"COMENTARIOS", yytext()));}
+({comentarioA})+ {return new Symbol(sym.COMENTARIOA, new token(yyline,"COMENTARIOS", yytext()));}
 
 /*ESPACIOS*/
-    ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline, yytext()));}
-    (" ") {return new Symbol(sym.UNESPACIO, new token(yyline, yytext()));}
+    ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext()));}
+    (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));}
 
 /*COMILLAS*/
-({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline, yytext()));}
+({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
     
 
 

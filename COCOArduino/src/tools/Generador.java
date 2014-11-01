@@ -6,7 +6,10 @@
 
 package tools;
 
+import JFlex.SilentExit;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +22,8 @@ public class Generador {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JFlex.Main.generate(new File("src\\tools\\ALexico.flex"));
+        
     }
-    
 }
+    
+
