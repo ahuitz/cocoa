@@ -736,39 +736,39 @@ class Lexico implements java_cup.runtime.Scanner {
           }
         case 13: break;
         case 5: 
-          { return new Symbol(sym.ESPECIALES, new token(yyline, yytext()));
+          { return new Symbol(sym.ESPECIALES, new token(yyline, "",yytext()));
           }
         case 14: break;
         case 11: 
-          { return new Symbol(sym.CADENAS, new token(yyline, yytext()));
+          { return new Symbol(sym.CADENAS, new token(yyline,"", yytext()));
           }
         case 15: break;
         case 2: 
-          { return new Symbol(sym.OPERADOR, new token(yyline, yytext()));
+          { return new Symbol(sym.OPERADOR, new token(yyline,"", yytext()));
           }
         case 16: break;
         case 7: 
-          { return new Symbol(sym.FNLINEA, new token(yyline, yytext()));
+          { return new Symbol(sym.FNLINEA, new token(yyline,"", yytext()));
           }
         case 17: break;
         case 12: 
-          { return new Symbol(sym.DOSESPACIOS, new token(yyline, yytext()));
+          { return new Symbol(sym.DOSESPACIOS, new token(yyline,"", yytext()));
           }
         case 18: break;
         case 9: 
-          { return new Symbol(sym.RESERVADA, new token(yyline, yytext()));
+          { return new Symbol(sym.RESERVADA, new token(yyline,"", yytext()));
           }
         case 19: break;
         case 10: 
-          { return new Symbol(sym.COMENTARIOS, new token(yyline, yytext()));
+          { return new Symbol(sym.COMENTARIOS, new token(yyline,"", yytext()));
           }
         case 20: break;
         case 8: 
-          { return new Symbol(sym.UNESPACIO, new token(yyline, yytext()));
+          { return new Symbol(sym.UNESPACIO, new token(yyline,"", yytext()));
           }
         case 21: break;
         case 3: 
-          { return new Symbol(sym.NUMERO, new token(yyline, yytext()));
+          { return new Symbol(sym.NUMERO, new token(yyline,"", yytext()));
           }
         case 22: break;
         case 6: 
@@ -776,7 +776,7 @@ class Lexico implements java_cup.runtime.Scanner {
           }
         case 23: break;
         case 4: 
-          { return new Symbol(sym.ID, new token(yyline, yytext()));
+          { return new Symbol(sym.ID, new token(yyline,"", yytext()));
           }
         case 24: break;
         default: 

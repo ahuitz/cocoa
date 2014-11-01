@@ -16,6 +16,7 @@ public class token {
     private String cadena;
     private int entero;
     private float decimal;
+    private String identificador;
     private String cadenas;
 
     /**
@@ -25,6 +26,7 @@ public class token {
      * @param cadena texto leido en el analizador lexico
      * @param esEntero variable que recibe verdadero si es un numero entero, de lo contario se
      *                   asume que es un flotante/decimal
+     * @param identificador alamacena si que tipo de token es "variable","reservada" etc
      */
     public token(int fila, String identificador, String cadena, boolean esEntero, String cadenas) {
         this.fila = fila;        
@@ -42,11 +44,20 @@ public class token {
      * @param fila numero de fila en la que se encuentra el caracter almacenado
      * @param cadena texto encontrado por el analizador lexico
      */
-    public token(int fila, String cadena) {
+    public token(int fila,String identificador, String cadena) {
         this.fila = fila;
+        this.identificador=identificador;
         this.cadena = cadena;
     }
-    
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
+    }
+        
     public int getFila() {
         return fila;
     }
