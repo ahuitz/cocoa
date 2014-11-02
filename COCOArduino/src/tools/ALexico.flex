@@ -96,7 +96,7 @@ espacioBlanco {lineaTerminal}|[ \t\f]
 /*ESPACIOS*/
  //   ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext()));}
  //   (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));}
-
+{lineaTerminal} {return new Symbol(sym.FNLINEA, new token(yyline,"FNLINEA",yytext()));}
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
     

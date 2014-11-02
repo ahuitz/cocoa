@@ -59,13 +59,9 @@ public class sym {
     public static final int COMA=45;
     public static final int CA=46;
     public static final int CC=47;
-    public static final int COMENTARIOB=48;
-    public static final int COMENTARIOA=49;
-    public static final int DOSESPACIOS=50;
-    public static final int UNESPACIO=51;
     public static final int CADENAS=52;
     public static final int ERROR=53;
-    
+    public static final int FNLINEA=54;
   
     
 }

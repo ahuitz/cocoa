@@ -813,16 +813,16 @@ class Lexico implements java_cup.runtime.Scanner {
           }
         case 64: break;
         case 34: 
-          { return new Symbol(sym.COMENTARIOA, new token(yyline,"COMENTARIOS", yytext()));
-          }
+/*          { return new Symbol(sym.COMENTARIOA, new token(yyline,"COMENTARIOS", yytext()));
+          }*/
         case 65: break;
         case 52: 
           { return new Symbol(sym.MIENTRAS, new token(yyline,"RESERVADA", yytext()));
           }
         case 66: break;
-        case 31: 
+/*        case 31: 
           { return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext()));
-          }
+          }*/
         case 67: break;
         case 35: 
           { return new Symbol(sym.LEER, new token(yyline,"RESERVADA", yytext()));
@@ -880,9 +880,9 @@ class Lexico implements java_cup.runtime.Scanner {
           { return new Symbol(sym.MODULO, new token(yyline,"OPERADOR", yytext()));
           }
         case 81: break;
-        case 25: 
+       /* case 25: 
           { return new Symbol(sym.COMENTARIOB, new token(yyline,"COMENTARIOS", yytext()));
-          }
+          }*/
         case 82: break;
         case 53: 
           { return new Symbol(sym.VERDADERO, new token(yyline,"RESERVADA", yytext()));
@@ -897,8 +897,8 @@ class Lexico implements java_cup.runtime.Scanner {
           }
         case 85: break;
         case 21: 
-          { return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));
-          }
+/*          { return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));
+          }*/
         case 86: break;
         case 9: 
           { return new Symbol(sym.MULTIPLICACION, new token(yyline,"OPERADOR", yytext()));
