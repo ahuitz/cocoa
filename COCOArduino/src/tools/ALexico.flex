@@ -21,6 +21,7 @@ nomClase = [A-Z]+{variables}
 comillas="\"" {entradaC}*{finL}? "\""
 lineaTerminal = \r|\n|\r|\n
 espacioBlanco {lineaTerminal}|[ \t\f]
+finlinea = [\n^]
 %eofval{
   System.out.println("Fin de archivo encontrado");
   return new Symbol(sym.EOF);
@@ -28,12 +29,13 @@ espacioBlanco {lineaTerminal}|[ \t\f]
 %eofclose
 
 %%
-"clase" {return new Symbol(sym.CLASE, new token(yyline,"RESERVADA", yytext()));}
-"propiedades" {return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
-{nomClase} {return new Symbol(sym.NOMCLASE, new token(yyline,"ID", yytext()));}
+{finliena} {System.out.println("INDENT",yytext());,return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}}
+"clase" {System.out.println("RESERVADA",yytext());,return new Symbol(sym.CLASE, new token(yyline,"RESERVADA", yytext()));}
+"propiedades" {System.out.println("RESERVADA",yytext());,return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
+{nomClase} {System.out.println("ID",yytext());return new Symbol(sym.NOMCLASE, new token(yyline,"ID", yytext()));}
 
     /*RESERVADAS PARA METODOS*/
-        "boleano" {return new Symbol(sym.BOLEANO, new token(yyline,"RESERVADA", yytext()));}
+        "boleano" {System.out.println("RESERVADA",yytext());,return new Symbol(sym.BOLEANO, new token(yyline,"RESERVADA", yytext()));}
         "cadena" {return new Symbol(sym.CADENA, new token(yyline,"RESERVADA", yytext()));}
         "entero" {return new Symbol(sym.ENTERO, new token(yyline,"RESERVADA", yytext()));}
         "decimal" {return new Symbol(sym.DECIMAL, new token(yyline,"RESERVADA", yytext()));}

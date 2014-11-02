@@ -62,6 +62,7 @@ public class sym {
     public static final int CADENAS=52;
     public static final int ERROR=53;
     public static final int FNLINEA=54;
+    public static final int INDENT=55;
   
     
 }
