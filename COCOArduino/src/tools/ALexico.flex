@@ -93,7 +93,7 @@ comillas="\"" {entradaC}*{finL}? "\""
 ({comentarioA})+ {return new Symbol(sym.COMENTARIOA, new token(yyline,"COMENTARIOS", yytext()));}
 
 /*ESPACIOS*/
-    ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext()));}
+ //   ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext()));}
     (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));}
 
 /*COMILLAS*/
