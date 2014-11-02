@@ -19,7 +19,8 @@ comentarioA = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 comentarioB = "//" {entradaC}*{finL}?
 nomClase = [A-Z]+{variables}
 comillas="\"" {entradaC}*{finL}? "\""
-
+lineaTerminal = \r|\n|\r|\n
+espacioBlanco {lineaTerminal}|[ \t\f]
 %eofval{
   System.out.println("Fin de archivo encontrado");
   return new Symbol(sym.EOF);
@@ -89,12 +90,12 @@ comillas="\"" {entradaC}*{finL}? "\""
 "]"             {return new Symbol(sym.CC, new token(yyline,"ESPECIALES", yytext()));}
 
 /*COMENTARIOS*/
-({comentarioB})+ {return new Symbol(sym.COMENTARIOB, new token(yyline,"COMENTARIOS", yytext()));}
-({comentarioA})+ {return new Symbol(sym.COMENTARIOA, new token(yyline,"COMENTARIOS", yytext()));}
-
+({comentarioB})+ {/*ignore*/}
+({comentarioA})+ {/*ignore*/}
+{espacioBlanco} {/*ignore*/}
 /*ESPACIOS*/
  //   ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext()));}
-    (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));}
+ //   (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));}
 
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
