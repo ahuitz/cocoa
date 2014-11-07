@@ -5,7 +5,7 @@ import java_cup.runtime.Symbol;
 %line
 %cup
 
-comilla= ["a-zA-Z"]
+//comilla= ["a-zA-Z"]
 entero= [0-9]
 exponente=["x10""X10"eE]
 flotante={entero}[\.]{entero}+{exponente}[0-9]+
@@ -19,23 +19,25 @@ comentarioA = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 comentarioB = "//" {entradaC}*{finL}?
 nomClase = [A-Z]+{variables}
 comillas="\"" {entradaC}*{finL}? "\""
-lineaTerminal = \r|\n|\r|\n
-espacioBlanco {lineaTerminal}|[ \t\f]
-finlinea = [\n^]
+lineaTerminal = [\r|\n|\r|\n]
+espacioBlanco = {lineaTerminal}|[ \t\f]
+//finlinea = [\n^]
 %eofval{
   System.out.println("Fin de archivo encontrado");
   return new Symbol(sym.EOF);
 %eofval}
 %eofclose
 
-%%
-{finliena} {System.out.println("INDENT",yytext());,return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}}
-"clase" {System.out.println("RESERVADA",yytext());,return new Symbol(sym.CLASE, new token(yyline,"RESERVADA", yytext()));}
-"propiedades" {System.out.println("RESERVADA",yytext());,return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
-{nomClase} {System.out.println("ID",yytext());return new Symbol(sym.NOMCLASE, new token(yyline,"ID", yytext()));}
+%%   
+
+//{finlinea} {return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}
+
+"propiedades" {return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
+{nomClase} {return new Symbol(sym.NOMCLASE, new token(yyline,"ID", yytext()));}
+"clase" {return new Symbol(sym.CLASE, new token(yyline,"RESERVADA", yytext()));}
 
     /*RESERVADAS PARA METODOS*/
-        "boleano" {System.out.println("RESERVADA",yytext());,return new Symbol(sym.BOLEANO, new token(yyline,"RESERVADA", yytext()));}
+        "boleano" {return new Symbol(sym.BOLEANO, new token(yyline,"RESERVADA", yytext()));}
         "cadena" {return new Symbol(sym.CADENA, new token(yyline,"RESERVADA", yytext()));}
         "entero" {return new Symbol(sym.ENTERO, new token(yyline,"RESERVADA", yytext()));}
         "decimal" {return new Symbol(sym.DECIMAL, new token(yyline,"RESERVADA", yytext()));}
@@ -96,9 +98,9 @@ finlinea = [\n^]
 ({comentarioA})+ {/*ignore*/}
 {espacioBlanco} {/*ignore*/}
 /*ESPACIOS*/
- //   ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext()));}
- //   (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext()));}
-{lineaTerminal} {return new Symbol(sym.FNLINEA, new token(yyline,"FNLINEA",yytext()));}
+ //   ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext())); }
+ //   (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext())); }
+{lineaTerminal} {return new Symbol(sym.FNLINEA, new token(yyline,"FNLINEA",yytext())); }
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
     
@@ -106,7 +108,7 @@ finlinea = [\n^]
 
 /*FIN DE LINEA*/
 
-[\r\n\f] {}
+[ \r\n\f] { }
 . {yyclose(); 
     System.err.println("Caracter Invalido" + yytext() + "["+ yyline + "]");
     return new Symbol(sym.ERROR);}

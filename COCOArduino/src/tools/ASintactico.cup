@@ -1,0 +1,15 @@
+package tools;
+
+import java_cup.runtime.Symbol;
+
+action conde {:
+    
+:}
+
+parser code {:
+    
+:}
+
+terminal CLASE, NOMCLASE, PROPIEDADES, METODOS;
+
+non terminal class;

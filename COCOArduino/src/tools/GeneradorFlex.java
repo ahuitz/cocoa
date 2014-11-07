@@ -15,14 +15,14 @@ import java.util.logging.Logger;
  *
  * @author Rosario
  */
-public class Generador {
+public class GeneradorFlex {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        JFlex.Main.generate(new File("src\\tools\\ALexico.flex"));
     }
 }
     
