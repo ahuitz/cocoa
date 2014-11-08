@@ -20,11 +20,11 @@ public class main {
     
     public static void main(String[] args) {        
         try {
-            Lexico lex = new Lexico(new FileReader("prueba.txt"));
-            /*AnalizadorSintactico parser = new AnalizadorSintactico(lex);
-            parser.parse();*/
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            Lexico lex = new Lexico(new FileReader("src/cocoarduino/prueba.txt"));
+            Analizador parser = new Analizador(lex);
+            parser.parse();            
+        }catch (java.lang.Exception el){
+            System.out.println("error encontrado" + el.getMessage());
         }
     }
     

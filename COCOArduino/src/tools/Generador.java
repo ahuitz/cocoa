@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Rosario
  */
-public class GeneradorFlex {
+public class Generador {
 
     /**
      * @param args the command line arguments

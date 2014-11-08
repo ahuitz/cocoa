@@ -1,15 +1,28 @@
 package tools;
 
 import java_cup.runtime.Symbol;
+import java.util.ArrayList;
 
-action conde {:
+action code {:
     
 :}
 
-parser code {:
-    
-:}
 
-terminal CLASE, NOMCLASE, PROPIEDADES, METODOS;
+terminal token CLASE, NOMCLASE, PROPIEDADES, METODOS;
+terminal BOLEANO, CADENA, DECIMAL, NUMERO, AND, DESDE,DEVOLVER;
+terminal ENTONCES, ESCRIBIR, EXTIENDE, FALSO, HACER, INCREMENTAR;
+terminal LEER, MIENTRAS, NULO, SINO, SI, RETORNAR, OR, VERDADERO;
+terminal VARIABLE, MMAS, MMENOS, SUMA, RESTA, MULTIPLICACION, MODULO;
+terminal IIGUAL, IGUAL, DIAGONAL, MAYORQUE, MENORQUE, DIFERENCIA, OPCION;
+terminal PCOMA, PUNTO, PA, PC, COMA, CA, CC, CADENAS, ERROR, FNLINEA, INDENT;
+terminal ENTERO;
 
-non terminal class;
+non terminal clase;
+
+start with clase;
+
+clase ::= CLASE:c NOMCLASE:nc PROPIEDADES:p {:
+            System.out.println(c.getCadena());
+            System.out.println(nc.getCadena()); 
+            System.out.println(p.getCadena());
+        :};
